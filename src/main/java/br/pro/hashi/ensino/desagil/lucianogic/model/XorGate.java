@@ -7,7 +7,7 @@ public class XorGate extends Gate {
 	private NandGate nandRight;
 
 	public XorGate() {
-		super(2);
+		super(2, 1);
 
 		name = "XOR";
 
@@ -25,7 +25,7 @@ public class XorGate extends Gate {
 	}
 
 	@Override
-	public boolean read() {
+	public boolean doRead(int index) {
 		return nandRight.read();
 	}
 

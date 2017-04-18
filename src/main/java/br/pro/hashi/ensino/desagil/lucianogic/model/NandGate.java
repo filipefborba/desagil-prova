@@ -4,13 +4,13 @@ public class NandGate extends Gate {
 	private Emitter[] emitters;
 
 	public NandGate() {
-		super(2);
+		super(2, 1);
 		name = "NAND";
 		emitters = new Emitter[2];
 	}
 
 	@Override
-	public boolean read() {
+	public boolean doRead(int index) {
 		return !(emitters[0].read() && emitters[1].read());
 	}
 

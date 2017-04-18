@@ -7,7 +7,7 @@ public class MuxGate extends Gate {
 	private NandGate nandRight;
 
 	public MuxGate() {
-		super(3);
+		super(3, 1);
 
 		name = "MUX";
 
@@ -24,7 +24,7 @@ public class MuxGate extends Gate {
 	}
 
 	@Override
-	public boolean read() {
+	public boolean doRead(int index) {
 		return nandRight.read();
 	}
 

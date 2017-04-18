@@ -5,7 +5,7 @@ public class AndGate extends Gate {
 	private NandGate nandRight;
 
 	public AndGate() {
-		super(2);
+		super(2, 1);
 
 		name = "AND";
 
@@ -17,7 +17,7 @@ public class AndGate extends Gate {
 	}
 
 	@Override
-	public boolean read() {
+	public boolean doRead(int index) {
 		return nandRight.read();
 	}
 

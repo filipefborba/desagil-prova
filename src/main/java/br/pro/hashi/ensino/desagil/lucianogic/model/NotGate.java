@@ -4,13 +4,13 @@ public class NotGate extends Gate {
 	private NandGate nandGate;
 
 	public NotGate() {
-		super(1);
+		super(1, 1);
 		name = "NOT";
 		nandGate = new NandGate();
 	}
 
 	@Override
-	public boolean read() {
+	public boolean doRead(int index) {
 		return nandGate.read();
 	}
 

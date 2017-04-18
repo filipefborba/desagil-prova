@@ -6,7 +6,7 @@ public class OrGate extends Gate {
 	private NandGate nandRight;
 
 	public OrGate() {
-		super(2);
+		super(2, 1);
 
 		name = "OR";
 
@@ -20,7 +20,7 @@ public class OrGate extends Gate {
 	}
 
 	@Override
-	public boolean read() {
+	public boolean doRead(int index) {
 		return nandRight.read();
 	}
 

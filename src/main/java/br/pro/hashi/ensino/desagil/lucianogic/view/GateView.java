@@ -35,13 +35,13 @@ public class GateView extends FixedPanel implements ItemListener {
 
 		image = loadImage(gate.toString());
 
-		int size = gate.getSize();
+		int inSize = gate.getInSize();
 
-		inBoxes = new JCheckBox[size];
+		inBoxes = new JCheckBox[inSize];
 
-		switches = new Switch[size];
+		switches = new Switch[inSize];
 
-		for(int i = 0; i < size; i++) {
+		for(int i = 0; i < inSize; i++) {
 			inBoxes[i] = new JCheckBox();
 
 			inBoxes[i].addItemListener(this);
@@ -55,11 +55,11 @@ public class GateView extends FixedPanel implements ItemListener {
 
 		outBox.setEnabled(false);
 
-		if(size == 1) {
+		if(inSize == 1) {
 			add(inBoxes[0], 0, 60, 20, 20);			
 		}
 		else {
-			for(int i = 0; i < size; i++) {
+			for(int i = 0; i < inSize; i++) {
 				add(inBoxes[i], 0, (i + 1) * 40, 20, 20);			
 			}			
 		}
