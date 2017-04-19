@@ -12,6 +12,8 @@ import br.pro.hashi.ensino.desagil.lucianogic.model.NandGate;
 import br.pro.hashi.ensino.desagil.lucianogic.model.NotGate;
 import br.pro.hashi.ensino.desagil.lucianogic.model.OrGate;
 import br.pro.hashi.ensino.desagil.lucianogic.model.XorGate;
+import br.pro.hashi.ensino.desagil.lucianogic.model.HalfGate;
+import br.pro.hashi.ensino.desagil.lucianogic.model.FullGate;
 import br.pro.hashi.ensino.desagil.lucianogic.view.MainView;
 
 public class Main {
@@ -29,6 +31,8 @@ public class Main {
             	model.add(new AndGate());
             	model.add(new XorGate());
             	model.add(new MuxGate());
+            	model.add(new HalfGate());
+            	model.add(new FullGate());
 
             	// Cria a tela principal.
             	MainView mainView = new MainView(model);

@@ -22,9 +22,10 @@ public class GateView extends FixedPanel implements ItemListener {
 	private Image image;
 
 	private JCheckBox[] inBoxes;
-	private JCheckBox outBox;
+	private JCheckBox[] outBoxes;
 
-	private Switch[] switches;
+	private Switch[] switches_in;
+	private Switch[] switches_out;
 	private Gate gate;
 
 
@@ -36,24 +37,25 @@ public class GateView extends FixedPanel implements ItemListener {
 		image = loadImage(gate.toString());
 
 		int inSize = gate.getInSize();
+		int outSize = gate.getOutSize();
 
 		inBoxes = new JCheckBox[inSize];
 
-		switches = new Switch[inSize];
+		switches_in = new Switch[inSize];
 
 		for(int i = 0; i < inSize; i++) {
 			inBoxes[i] = new JCheckBox();
 
 			inBoxes[i].addItemListener(this);
 
-			switches[i] = new Switch();
+			switches_in[i] = new Switch();
 
-			gate.connect(switches[i], i);
+			gate.connect(switches_in[i], i);
 		}
 
-		outBox = new JCheckBox();
+		outBoxes = new JCheckBox[outSize];
 
-		outBox.setEnabled(false);
+		switches_out = new Switch[outSize];
 
 		if(inSize == 1) {
 			add(inBoxes[0], 0, 60, 20, 20);			
@@ -63,10 +65,27 @@ public class GateView extends FixedPanel implements ItemListener {
 				add(inBoxes[i], 0, (i + 1) * 40, 20, 20);			
 			}			
 		}
+		
+		for(int i = 0; i < outSize; i++) {
+			outBoxes[i] = new JCheckBox();
 
-		add(outBox, 184, 60, 20, 20);
+			outBoxes[i].addItemListener(this);
 
-		outBox.setSelected(gate.read());
+			switches_out[i] = new Switch();
+
+			gate.connect(switches_out[i], i);
+		}
+		
+		if(outSize == 1) {
+			add(outBoxes[0], 184, 60, 20, 20);	
+		}
+		else {
+			for(int i = 0; i < outSize; i++) {
+				add(outBoxes[i], 184, (i + 1) * 40, 20, 20);			
+			}			
+		}
+
+		//outBoxes[i].setSelected(gate.read());
 	}
 
 
@@ -79,9 +98,9 @@ public class GateView extends FixedPanel implements ItemListener {
 			}
 		}
 
-		switches[i].setOn(inBoxes[i].isSelected());
+		switches_in[i].setOn(inBoxes[i].isSelected());
 
-		outBox.setSelected(gate.read());
+		outBoxes[i].setSelected(gate.read());
 	}
 
 
