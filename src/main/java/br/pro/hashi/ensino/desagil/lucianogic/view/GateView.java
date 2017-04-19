@@ -24,8 +24,7 @@ public class GateView extends FixedPanel implements ItemListener {
 	private JCheckBox[] inBoxes;
 	private JCheckBox[] outBoxes;
 
-	private Switch[] switches_in;
-	private Switch[] switches_out;
+	private Switch[] switches;
 	private Gate gate;
 
 
@@ -40,23 +39,18 @@ public class GateView extends FixedPanel implements ItemListener {
 		int outSize = gate.getOutSize();
 
 		inBoxes = new JCheckBox[inSize];
-
-		switches_in = new Switch[inSize];
+		switches = new Switch[inSize];
 
 		for(int i = 0; i < inSize; i++) {
 			inBoxes[i] = new JCheckBox();
 
 			inBoxes[i].addItemListener(this);
 
-			switches_in[i] = new Switch();
+			switches[i] = new Switch();
 
-			gate.connect(switches_in[i], i);
+			gate.connect(switches[i], i);
 		}
-
-		outBoxes = new JCheckBox[outSize];
-
-		switches_out = new Switch[outSize];
-
+		
 		if(inSize == 1) {
 			add(inBoxes[0], 0, 60, 20, 20);			
 		}
@@ -65,27 +59,25 @@ public class GateView extends FixedPanel implements ItemListener {
 				add(inBoxes[i], 0, (i + 1) * 40, 20, 20);			
 			}			
 		}
+
+		outBoxes = new JCheckBox[outSize];
 		
 		for(int i = 0; i < outSize; i++) {
 			outBoxes[i] = new JCheckBox();
-
-			outBoxes[i].addItemListener(this);
-
-			switches_out[i] = new Switch();
-
-			gate.connect(switches_out[i], i);
+			outBoxes[i].setEnabled(false);
 		}
 		
-		if(outSize == 1) {
-			add(outBoxes[0], 184, 60, 20, 20);	
+		if(outSize == 1 || outSize == 2) {
+			add(outBoxes[0], 184, 60, 20, 20);
+			outBoxes[0].setSelected(gate.read(0));
 		}
-		else {
-			for(int i = 0; i < outSize; i++) {
-				add(outBoxes[i], 184, (i + 1) * 40, 20, 20);			
-			}			
+		if(outSize == 2) {
+			add(outBoxes[1], 184, 100, 20, 20);		
+			outBoxes[1].setSelected(gate.read(1));
 		}
 
-		//outBoxes[i].setSelected(gate.read());
+		
+		
 	}
 
 
@@ -97,10 +89,14 @@ public class GateView extends FixedPanel implements ItemListener {
 				break;
 			}
 		}
-
-		switches_in[i].setOn(inBoxes[i].isSelected());
-
-		outBoxes[i].setSelected(gate.read());
+		switches[i].setOn(inBoxes[i].isSelected());
+		
+		if(gate.getOutSize() == 1 || gate.getOutSize() == 2) {
+			outBoxes[0].setSelected(gate.read(0));
+		}
+		if(gate.getOutSize() == 2) {
+			outBoxes[1].setSelected(gate.read(1));
+		}
 	}
 
 
