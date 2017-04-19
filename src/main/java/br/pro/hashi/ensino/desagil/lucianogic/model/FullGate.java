@@ -27,10 +27,10 @@ public class FullGate extends Gate {
 
 	@Override
 	public boolean doRead(int index) {
-		if(index == 0){
+		if (index == 0) {
 			return xorGateRight.read();
 		}
-		else{
+		else {
 			return orGate.read();
 		}
 	}

@@ -7,7 +7,6 @@ public class HalfGate extends Gate {
 	public HalfGate() {
 		super(2, 2);
 		name = "HALF";
-
 		xorGate = new XorGate();
 		andGate = new AndGate();
 		
@@ -15,10 +14,11 @@ public class HalfGate extends Gate {
 
 	@Override
 	public boolean doRead(int index) {
-		if(index == 0){
+		if (index == 0) {
 			return xorGate.read();
 		}
-		else{
+		
+		else {
 			return andGate.read();
 		}
 	}
